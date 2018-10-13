@@ -9,7 +9,11 @@
 \usepackage[utf8]{inputenc}  
 % UTF-8 encoding is recommended by ShareLaTex
 
-     
+\usepackage{amsthm}
+\theoremstyle{plain}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Definição}     
 \sloppy
 
 \title{Estratégias de coreografia na arquitetura de microserviços: Um estudo exploratório}
@@ -52,10 +56,17 @@ A arquitetura baseada em microserviços tornou-se muito popular nos dias de hoje
     \item IAAS (Infrastructure As A Service)
     \item PaaS (Platform As A Service)
 \end{itemize}
-.
+Umas das justificativas para adoção da arquitetura de microserviços por parte das empresas é a facilidade na hora de escalar. Enquanto numa aplicação monolítica, o custo para escala é alto, pois você deve implantar uma aplicação completa numa outra máquina (escala horizontal), já na microserviços, você implanta somente o serviço que está sendo mais requisitado. Esta é uma vantagem da arquitetura de microserviços, você consegue aumentar os recursos somente para a parte com maior \textit{workload} do sistema. 
+Segundo \cite{Dragoni2017}, a definição de microserviços é:
+
+\begin{theorem*}
+Microserviço é um coesivo, processo independente interagindo através de troca de mensagens.
+\end{theorem*}
+Segundo \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. a maior vantagem dos microserviços não é a facilidade na escalabilidade
 
 \section{Objetivo} \label{sec:firstpage}
 
+Este artigo tem como objetivo principal. Segundo \cite{Zimmermann2005}
 The first page must display the paper title, the name and address of the
 authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
 required only for papers written in Portuguese). The title must be centered
