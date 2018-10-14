@@ -64,13 +64,13 @@ E segundo \cite{Dragoni2017}, uma arquitetura de microserviços é uma aplicaç�
 
 Umas das justificativas para adoção da arquitetura de microserviços por parte das empresas é a facilidade na hora de escalar. Enquanto numa aplicação monolítica, o custo para escala é alto, pois você deve implantar uma aplicação completa numa outra máquina (escala horizontal), já na microserviços, você implanta somente o serviço que está sendo mais requisitado. Esta é uma vantagem da arquitetura de microserviços, pois você consegue aumentar os recursos somente para a parte com maior \textit{workload} do sistema. 
 
-Porém, segundo \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. Além disso, a manutenção é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
+Para \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. Além disso, a manutenção é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
 
 Segundo \cite{jung:2017},as arquiteturas de microserviços compartilham algumas caraterísticas, dentre elas:
 
 \begin{itemize}
     \item \textbf{Descentralizado}: Arquitetura de microserviços são sistemas distribuídos com o gerenciamento de dados descentralizados. Conforme citado anteriormente, cada microserviço contém sua própria visão do modelo de dados. E o microserviço também é descentralizado no modo como ele é desenvolvido, implantado, gerenciado e operacionalizado.
-    \item \textbf{Independente}: Diferentes componentes podem ser alterados, atualizados ou substituídos sem afetar a funcionalidade de outros componentes. E os times responsáveis por cada microserviço podem agir de forma independente de cada um.
+    \item \textbf{Independente}: Diferentes componentes podem ser alterados, atualizados ou substituídos sem afetar a funcionalidade de outros componentes. E os times responsáveis por cada microserviço podem agir de forma independente.
     \item \textbf{\textit{Do one thing well}}: Cada microserviço deve ser projetado para um conjunto de funcionalidades e com foco num determinado domínio específico.
     \item \textbf{Caixa-preta}: Os componentes são projetados como caixa-preta, isto é, eles escondem os detalhes da sua complexidade dos outros componentes. A comunicação deve ser feita através de uma API bem definida para evitar dependências implícitas e/ou escondidas.
 \end{itemize}
@@ -97,25 +97,15 @@ Através de um estudo sistemático, \cite{Alshuqayran:2016} identificou os princ
     \item Operação de implantação
 \end{itemize}
 
-Logo, a adoção da arquitetura de microserviços não é uma tarefa simples. Há problemas desde integração e comunicação dos servicos, segurança e até organizacional, como dividir a equipe de desenvolvimento para seguir um método \textit{DevOps}, por exemplo \cite{jung:2017}. Um ponto importante é
+Logo, a adoção da arquitetura de microserviços não é uma tarefa simples. Há problemas desde integração e comunicação dos servicos, segurança e até organizacional, como definir a equipe de desenvolvimento e como mudar a cultura da empresa para seguir um método \textit{DevOps}, por exemplo \cite{jung:2017}. Um ponto importante e um desafio na arquitetura de microserviços é como manter o baixo acomplamento e alta coesão. Conforme o sistema cresce e mais lógicas complexas são acrescentadas, surge a necessidade de gerenciar como é feita a integração entre os serviços. 
+
+Segundo \cite{Dragoni2017}, microserviço é um processo independente coeso interagindo através de mensagens. E \cite{Newman:15}, sugere que esta troca de mensagens deva ser feita via \textit{REST}. E há dois estilos arquiteturais que podem ser seguidos para coordenar esta troca de mensagens. Uma é a orquestração, no qual a coordenação dos múltiplos serviços é feita através de um mediador central ou um \textit{hub} integrador (Mule, Camel, Spring Integration etc.). E a outra é a coreografia, no qual a coordenação das múltiplas chamadas dos serviços é feita sem um mediador central \cite{richards:15, Newman:15}. 
+
+Em geral, segundo \cite{Newman:15}, os sistemas que utilizam coreografia para coordenar a troca de mensagens tendem a ter um menor acoplamento, são mais flexíveis e aptos a mudanças. E boa parte dos autores \cite{wolf:2018, Dragoni2017, richards:15, Alshuqayran:2016} seguem a mesma linha de \cite{Newman:15} e sugerem que na arquitetura de microserviços a coreografia seja preterida em favor da orquestração.
 
 \section{Objetivo} \label{sec:firstpage}
 
-Este artigo tem como objetivo principal. Segundo \cite{Zimmermann2005}
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
-
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
+O objetivo deste artigo é fazer um estudo exploratório para investigar quais são as estratégias de coreografia utilizadas na arquitetura de microserviços. E também tentar identificar quais são as ferramentas comumente utilizadas. 
 
 \section{Trabalhos relacionados}
 
