@@ -9,6 +9,7 @@
 \usepackage[utf8]{inputenc}  
 % UTF-8 encoding is recommended by ShareLaTex
 
+
 \usepackage{amsthm}
 \theoremstyle{plain}
 
@@ -18,13 +19,13 @@
 
 \title{Estratégias de coreografia na arquitetura de microserviços: Um estudo exploratório}
 
-\author{Mauricio Ribeiro\inst{1}, Marcelo de Rezende Martins\inst{1}, John Sql\inst{1} }
+\author{Marcelo de Rezende Martins\inst{1}, Mauricio Ribeiro\inst{1}, John Sql\inst{1} }
 
 
 \address{Instituto de Pesquisas Tecnológicas -
   (IPT)\\
   São Paulo -- SP -- Brazil
-  \email{eng.mauricio@outlook.com, rezende.martins@gmail.com,
+  \email{rezende.martins@gmail.com, eng.mauricio@outlook.com,
   john.sql@gmail.com}
 }
 
@@ -56,13 +57,47 @@ A arquitetura baseada em microserviços tornou-se muito popular nos dias de hoje
     \item IAAS (Infrastructure As A Service)
     \item PaaS (Platform As A Service)
 \end{itemize}
-Umas das justificativas para adoção da arquitetura de microserviços por parte das empresas é a facilidade na hora de escalar. Enquanto numa aplicação monolítica, o custo para escala é alto, pois você deve implantar uma aplicação completa numa outra máquina (escala horizontal), já na microserviços, você implanta somente o serviço que está sendo mais requisitado. Esta é uma vantagem da arquitetura de microserviços, você consegue aumentar os recursos somente para a parte com maior \textit{workload} do sistema. 
-Segundo \cite{Dragoni2017}, a definição de microserviços é:
 
-\begin{theorem*}
-Microserviço é um coesivo, processo independente interagindo através de troca de mensagens.
-\end{theorem*}
-Segundo \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. a maior vantagem dos microserviços não é a facilidade na escalabilidade
+Do ponto de vista técnico, os microserviços devem ser componentes independentes conceitualmente, implantados isoladamente e equipados com recursos dedicados como memória e ferramentas de persistência \cite{Dragoni2017}.
+
+E segundo \cite{Dragoni2017}, uma arquitetura de microserviços é uma aplicação distribuída onde todos os módulos são microserviços.
+
+Umas das justificativas para adoção da arquitetura de microserviços por parte das empresas é a facilidade na hora de escalar. Enquanto numa aplicação monolítica, o custo para escala é alto, pois você deve implantar uma aplicação completa numa outra máquina (escala horizontal), já na microserviços, você implanta somente o serviço que está sendo mais requisitado. Esta é uma vantagem da arquitetura de microserviços, pois você consegue aumentar os recursos somente para a parte com maior \textit{workload} do sistema. 
+
+Porém, segundo \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. Além disso, a manutenção é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
+
+Segundo \cite{jung:2017},as arquiteturas de microserviços compartilham algumas caraterísticas, dentre elas:
+
+\begin{itemize}
+    \item \textbf{Descentralizado}: Arquitetura de microserviços são sistemas distribuídos com o gerenciamento de dados descentralizados. Conforme citado anteriormente, cada microserviço contém sua própria visão do modelo de dados. E o microserviço também é descentralizado no modo como ele é desenvolvido, implantado, gerenciado e operacionalizado.
+    \item \textbf{Independente}: Diferentes componentes podem ser alterados, atualizados ou substituídos sem afetar a funcionalidade de outros componentes. E os times responsáveis por cada microserviço podem agir de forma independente de cada um.
+    \item \textbf{\textit{Do one thing well}}: Cada microserviço deve ser projetado para um conjunto de funcionalidades e com foco num determinado domínio específico.
+    \item \textbf{Caixa-preta}: Os componentes são projetados como caixa-preta, isto é, eles escondem os detalhes da sua complexidade dos outros componentes. A comunicação deve ser feita através de uma API bem definida para evitar dependências implícitas e/ou escondidas.
+\end{itemize}
+
+E de acordo com \cite{jung:2017}, os principais benefícios apontados por quem adota esta arquitetura são:
+\begin{itemize}
+    \item \textbf{Agilidade}: O desenvolvimento é dividido entre times pequenos, cada uma responsável pelos seus serviços. Portanto, a equipe atua num contexto delimitado e bem definido, facilitando a compreensão e reduzindo o ciclo de desenvolvimento. 
+    \item \textbf{Inovação}: Com a independência dos microserviços, a alteração e o teste de novas idéias são facilitadas. O baixo custo para implantar um novo serviço, facilita a criação de uma cultura de mudança e inovação.
+    \item \textbf{Qualidade}: Os benefícios da divisão do desenvolvimento do software em componentes menores e bem definidos são similares aos benefícios vistos na programação orientada a objetos: reusabilidade, composibilidade e manutenibilidade.
+    \item \textbf{Escalabilidade}: Com o baixo acomplamento e alta coesão, os serviços podem ser escalados horizontalmente e independente de cada um. Além disso, a resiliência da aplicação pode ser improvisada, pois os serviços são facilmente substituídos.
+\end{itemize}
+
+Porém, a adoção da arquitetura de microserviços envolve vários desafios. Existe, por exemplo, a \textit{falácia da computação distribuída}, no qual os novos programadores na arquitetura distribuída acreditam que a comunicação na rede é confiável, a latência é zero e a banda de rede é infinita. Há também a dificuldade na migração de um sistema monolítico para uma arquitetura de microserviços. Para realizar esta tarefa, é necessário definir como o sistema será dividido, quais módulos serão criados, o escopo de cada módulo. E lembrando que os serviços devem ser independentes, coesos \cite{jung:2017}. 
+
+Através de um estudo sistemático, \cite{Alshuqayran:2016} identificou os principais desafios enfrentados na arquitetura de microserviços. Os principais desafios encontrados por \cite{Alshuqayran:2016} foram:
+\begin{itemize}
+    \item Integração/Comunicação
+    \item \textit{Service Discovery}
+    \item Desempenho
+    \item Tolerância a falhas
+    \item Segurança
+    \item \textit{Tracing e Logging}
+    \item Monitoramento do desempenho da aplicação
+    \item Operação de implantação
+\end{itemize}
+
+Logo, a adoção da arquitetura de microserviços não é uma tarefa simples. Há problemas desde integração e comunicação dos servicos, segurança e até organizacional, como dividir a equipe de desenvolvimento para seguir um método \textit{DevOps}, por exemplo \cite{jung:2017}. 
 
 \section{Objetivo} \label{sec:firstpage}
 
