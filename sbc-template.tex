@@ -47,6 +47,7 @@
 
 
 \section{Introdução}
+\label{sec:introducao}
 
 A arquitetura baseada em microserviços tornou-se muito popular nos dias de hoje. Muitas empresas estão migrando suas aplicações SOA e/ou monolíticos para uma arquitetura mais flexível como microserviços. O advento do microserviço deve-se a vários avanços tecnológicos nos últimos anos. Entre eles estão:
 \begin{itemize}
@@ -64,7 +65,7 @@ E segundo \cite{Dragoni2017}, uma arquitetura de microserviços é uma aplicaç�
 
 Umas das justificativas para adoção da arquitetura de microserviços por parte das empresas é a facilidade na hora de escalar. Enquanto numa aplicação monolítica, o custo para escala é alto, pois você deve implantar uma aplicação completa numa outra máquina (escala horizontal), já na microserviços, você implanta somente o serviço que está sendo mais requisitado. Esta é uma vantagem da arquitetura de microserviços, pois você consegue aumentar os recursos somente para a parte com maior \textit{workload} do sistema. 
 
-Para \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. Além disso, a manutenção é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
+Para \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. A manutenção é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
 
 Segundo \cite{jung:2017},as arquiteturas de microserviços compartilham algumas caraterísticas, dentre elas:
 
@@ -105,87 +106,26 @@ Em geral, segundo \cite{Newman:15}, os sistemas que utilizam coreografia para co
 
 \section{Objetivo} \label{sec:firstpage}
 
-O objetivo deste artigo é fazer um estudo exploratório para investigar quais são as estratégias de coreografia utilizadas na arquitetura de microserviços. E também tentar identificar quais são as ferramentas comumente utilizadas. 
+O objetivo deste artigo é fazer um estudo exploratório para investigar quais são as estratégias de coreografia utilizadas na arquitetura de microserviços. E também tentar identificar quais são as ferramentas comumente utilizadas. Na seção \ref{sec:trabalhos-relacionados} é apresentado os trabalhos que fazem referência a arquitetura de microserviços e o uso de coreografia. A seção \ref{sec:resultados} apresenta a compilação das estratégias de coreografia e ferramentas comumente citadas na literatura e/ou utilizados pela mercado. E a seção \ref{sec:conclusao} discute o resultado do artigo e trabalhos futuros.
 
 \section{Trabalhos relacionados}
+\label{sec:trabalhos-relacionados}
 
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
+Segundo \cite{wolf:2018}, um dos benefícios da arquitetura de microserviços é o baixo acoplamento e alta coesão do sistema. Para \cite{Newman:15}, sistemas que utilizam coreografia tendem a ter um menor acoplamento e são de fácil manutenção. A coreografia é um estilo arquitetural, é uma forma de definir como os serviços interagem entre si. No caso da coreografia, os microserviços interagem entre si sem um mediador central. A luz disso, uma possível pergunta é:
 
-\section{Trabalhos relacionados}
+\emph{Como coreografar os microserviços para que o sistema tenha um baixo acoplamento e alta coesão?}
 
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
-
-\subsection{Subsections}
-
-The subsection titles must be in boldface, 12pt, flush left.
-
-\section{Figures and Captions}\label{sec:figs}
+Para \cite{damore:2018}, é possível obter o baixo acoplamento utilizando uma coreografia baseado em eventos. Neste caso, os microserviços 
 
 
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
+\section{Resultados}
+\label{sec:resultados}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
+Seção de resultados
 
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
-
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\smallskip
-\begin{tabular}{|l|c|c|}
-\hline
-& Value 1 & Value 2\\[0.5ex]
-\hline
-&&\\[-2ex]
-Case 1 & 1.0 $\pm$ 0.1 & 1.75$\times$10$^{-5}$ $\pm$ 5$\times$10$^{-7}$\\[0.5ex]
-\hline
-&&\\[-2ex]
-Case 2 & 0.003(1) & 100.0\\[0.5ex]
-\hline
-\end{tabular}
-\end{table}
-
-\section{Images}
-
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
-
-\section{References}
+\section{Conclusão}
+\label{sec:conclusao}
 
 Bibliographic references must be unambiguous and uniform.  We recommend giving
 the author names references in brackets, e.g. \cite{knuth:84},
