@@ -17,9 +17,9 @@
 \newtheorem*{theorem*}{Definição}     
 \sloppy
 
-\title{Estratégias de coreografia na arquitetura de microserviços: Um estudo exploratório}
+\title{Estratégias de coreografia na arquitetura de microserviços: Uma pesquisa exploratória}
 
-\author{Marcelo de Rezende Martins\inst{1}, Mauricio Ribeiro\inst{1}, John Sql\inst{1} }
+\author{Marcelo de Rezende Martins\inst{1}, Mauricio Ribeiro\inst{1}, John Alves de Medeiros Silva\inst{1} }
 
 
 \address{Instituto de Pesquisas Tecnológicas -
@@ -42,24 +42,24 @@
 \end{abstract}
      
 \begin{resumo} 
-  Com a crescente utilização de microserviços na arquitetura de software também foi necessário desenvolver a técnica de interação entre os serviços. Uma técnica para coordenar a troca de mensagens entre os serviços é a coreografia. A técnica de coreografia, já conhecida nas arquitetura SOA (através da WS-CDL, por exemplo), é amplamente utilizada na arquitetura de microserviços. Dado a sua importância, este artigo busca identificar quais são as diferentes estratégias de coreografia através de um estudo exploratório. 
+  Com a crescente utilização de microserviços na arquitetura de software também foi necessário desenvolver a técnica de interação entre os serviços. Uma técnica para coordenar a troca de mensagens entre os serviços é a coreografia. A técnica de coreografia, já conhecida nas arquitetura SOA (através da WS-CDL, por exemplo), é amplamente utilizada na arquitetura de microserviços. Dado a sua importância, este artigo busca identificar quais são as diferentes estratégias de coreografia através de uma pesquisa exploratória. 
 \end{resumo}
 
 
 \section{Introdução}
 \label{sec:introducao}
 
-A arquitetura baseada em microserviços tornou-se muito popular nos dias de hoje. Muitas empresas estão migrando suas aplicações SOA e/ou monolíticos para uma arquitetura mais flexível como microserviços. O advento do microserviço deve-se a vários avanços tecnológicos nos últimos anos. Entre eles estão:
+A arquitetura baseada em microserviços tornou-se muito popular nos dias de hoje. Muitas empresas estão migrando suas aplicações SOA e/ou monolíticos para uma arquitetura mais flexível como microserviços. O advento do microserviço deve-se a vários avanços tecnológicos nos últimos anos. Para \cite{Newman:15}, os principais foram:
 \begin{itemize}
-    \item Arquitetura REST
-    \item Formato JSON
-    \item DDD (Domain Driven Design)
-    \item Cloud Computing
-    \item IAAS (Infrastructure As A Service)
-    \item PaaS (Platform As A Service)
+    \item \textit{Domain-Driven Design}
+    \item Entrega contínua (\textit{Continuous Delivery})
+    \item Virtualização por demanda (\textit{On-demand virtualization})
+    \item Automação da infra-estrutura
+    \item Times pequenos autônomos
+    \item Sistemas escaláveis
 \end{itemize}
 
-Do ponto de vista técnico, os microserviços devem ser componentes independentes conceitualmente, implantados isoladamente e equipados com recursos dedicados como memória e ferramentas de persistência \cite{Dragoni2017}.
+Do ponto de vista técnico, os microserviços devem ser componentes independentes conceitualmente, implantados isoladamente e equipados com recursos dedicados como memória e ferramentas de persistência \cite{Dragoni2017} (TROCAR PELA DEFINICAO DO MARTIN FOWLER).
 
 E segundo \cite{Dragoni2017}, uma arquitetura de microserviços é uma aplicação distribuída onde todos os módulos são microserviços.
 
@@ -67,21 +67,29 @@ Umas das justificativas para adoção da arquitetura de microserviços por parte
 
 Para \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. A manutenção é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
 
-Segundo \cite{jung:2017},as arquiteturas de microserviços compartilham algumas caraterísticas, dentre elas:
+Segundo \cite{martinfowler-microservices:2014},as arquiteturas de microserviços compartilham algumas caraterísticas, dentre elas:
 
 \begin{itemize}
-    \item \textbf{Descentralizado}: Arquitetura de microserviços são sistemas distribuídos com o gerenciamento de dados descentralizados. Conforme citado anteriormente, cada microserviço contém sua própria visão do modelo de dados. E o microserviço também é descentralizado no modo como ele é desenvolvido, implantado, gerenciado e operacionalizado.
-    \item \textbf{Independente}: Diferentes componentes podem ser alterados, atualizados ou substituídos sem afetar a funcionalidade de outros componentes. E os times responsáveis por cada microserviço podem agir de forma independente.
-    \item \textbf{\textit{Do one thing well}}: Cada microserviço deve ser projetado para um conjunto de funcionalidades e com foco num determinado domínio específico.
-    \item \textbf{Caixa-preta}: Os componentes são projetados como caixa-preta, isto é, eles escondem os detalhes da sua complexidade dos outros componentes. A comunicação deve ser feita através de uma API bem definida para evitar dependências implícitas e/ou escondidas.
+    \item Componentização através de serviços
+    \item Organizado em torno da capacidade do negócio
+    \item Produto não Projeto
+    \item Serviços inteligentes e intermediários simples (\textit{Smart endpoints and dumb pipes})
+    \item Governança descentralizada
+    \item Gerenciamento de dados descentralizado
+    \item Automação da infra-estrutura
+    \item Tolerância a falhas
+    \item Projeto evolutivo
 \end{itemize}
 
-E de acordo com \cite{jung:2017}, os principais benefícios apontados por quem adota esta arquitetura são:
+E de acordo com \cite{Alshuqayran:2016}, os principais benefícios apontados por quem adota esta arquitetura são o aumento em:
 \begin{itemize}
-    \item \textbf{Agilidade}: O desenvolvimento é dividido entre times pequenos, cada uma responsável pelos seus serviços. Portanto, a equipe atua num contexto delimitado e bem definido, facilitando a compreensão e reduzindo o ciclo de desenvolvimento. 
-    \item \textbf{Inovação}: Com a independência dos microserviços, a alteração e o teste de novas idéias são facilitadas. O baixo custo para implantar um novo serviço, facilita a criação de uma cultura de mudança e inovação.
-    \item \textbf{Qualidade}: Os benefícios da divisão do desenvolvimento do software em componentes menores e bem definidos são similares aos benefícios vistos na programação orientada a objetos: reusabilidade, composibilidade e manutenibilidade.
-    \item \textbf{Escalabilidade}: Com o baixo acomplamento e alta coesão, os serviços podem ser escalados horizontalmente e independente de cada um. Além disso, a resiliência da aplicação pode ser improvisada, pois os serviços são facilmente substituídos.
+    \item Agilidade
+    \item Produtividade do desenvolvedor
+    \item Resiliência
+    \item Escalabilidade
+    \item Confiabilidade
+    \item Manutenibilidade
+    \item Fácil implantação
 \end{itemize}
 
 Porém, a adoção da arquitetura de microserviços envolve vários desafios. Existe, por exemplo, a \textit{falácia da computação distribuída}, no qual os novos programadores na arquitetura distribuída acreditam que a comunicação na rede é confiável, a latência é zero e a banda de rede é infinita. Há também a dificuldade na migração de um sistema monolítico para uma arquitetura de microserviços. Para realizar esta tarefa, é necessário definir como o sistema será dividido, quais módulos serão criados, o escopo de cada módulo. E lembrando que os serviços devem ser independentes, coesos \cite{jung:2017}. 
@@ -90,7 +98,7 @@ Através de um estudo sistemático, \cite{Alshuqayran:2016} identificou os princ
 \begin{itemize}
     \item Integração/Comunicação
     \item \textit{Service Discovery}
-    \item Desempenho
+    \item Performance
     \item Tolerância a falhas
     \item Segurança
     \item \textit{Tracing e Logging}
@@ -100,13 +108,19 @@ Através de um estudo sistemático, \cite{Alshuqayran:2016} identificou os princ
 
 Logo, a adoção da arquitetura de microserviços não é uma tarefa simples. Há problemas desde integração e comunicação dos servicos, segurança e até organizacional, como definir a equipe de desenvolvimento e como mudar a cultura da empresa para seguir um método \textit{DevOps}, por exemplo \cite{jung:2017}. Um ponto importante e um desafio na arquitetura de microserviços é como manter o baixo acomplamento e alta coesão. Conforme o sistema cresce e mais lógicas complexas são acrescentadas, surge a necessidade de gerenciar como é feita a integração entre os serviços. 
 
-Segundo \cite{Dragoni2017}, microserviço é um processo independente coeso interagindo através de mensagens. E \cite{Newman:15}, sugere que esta troca de mensagens deva ser feita via \textit{REST}. E há dois estilos arquiteturais que podem ser seguidos para coordenar esta troca de mensagens. Uma é a orquestração, no qual a coordenação dos múltiplos serviços é feita através de um mediador central ou um \textit{hub} integrador (Mule, Camel, Spring Integration etc.). E a outra é a coreografia, no qual a coordenação das múltiplas chamadas dos serviços é feita sem um mediador central \cite{richards:15, Newman:15}. 
+Segundo \cite{Newman:15}, microserviço é um serviço autônomo e pequeno. E \cite{martinfowler-microservices:2014} complementa, microserviço é um serviço que é executado no seu próprio processo e utiliza mecanismos leves de comunicação. Normalmente esta comunicação é feita por meio de uma API (\textit{Application Programming Interface} utilizando o protocolo HTTP (\textit{Hypertext Transfer Protocol}). E \cite{Newman:15}, sugere que esta troca de mensagens deva ser feita via \textit{REST}. E há dois estilos arquiteturais que podem ser seguidos para coordenar esta troca de mensagens. Uma é a orquestração, no qual a coordenação dos múltiplos serviços é feita através de um mediador central ou um \textit{hub} integrador (Mule, Camel, Spring Integration etc.). E a outra é a coreografia, no qual a coordenação das múltiplas chamadas dos serviços é feita sem um mediador central \cite{richards:15, Newman:15}. 
 
 Em geral, segundo \cite{Newman:15}, os sistemas que utilizam coreografia para coordenar a troca de mensagens tendem a ter um menor acoplamento, são mais flexíveis e aptos a mudanças. E boa parte dos autores \cite{wolf:2018, Dragoni2017, richards:15, Alshuqayran:2016} seguem a mesma linha de \cite{Newman:15} e sugerem que na arquitetura de microserviços a coreografia seja preterida em favor da orquestração.
 
 \section{Objetivo} \label{sec:firstpage}
 
-O objetivo deste artigo é fazer um estudo exploratório para investigar quais são as estratégias de coreografia utilizadas na arquitetura de microserviços. E também tentar identificar quais são as ferramentas comumente utilizadas. Na seção \ref{sec:trabalhos-relacionados} é apresentado os trabalhos que fazem referência a arquitetura de microserviços e o uso de coreografia. A seção \ref{sec:resultados} apresenta a compilação das estratégias de coreografia e ferramentas comumente citadas na literatura e/ou utilizados pela mercado. E a seção \ref{sec:conclusao} discute o resultado do artigo e trabalhos futuros.
+De acordo com \cite{gil:17}, o objetivo de uma pesquisa exploratória é:
+
+"\emph{Estas pesquisas têm como objetivo proporcionar maior familiaridade com o problema com vistas a
+tomá-lo mais explícito ou a construir hipóteses. Pode-se dizer que estas pesquisas têm como
+objetivo principal o aprimoramento de idéias ou a descoberta de intuições.}"
+
+O objetivo deste artigo é ampliar e aprimorar o conhecimento sobre as diferentes estratégias de coreografia utilizadas na arquitetura de microserviços. A partir disso, este estudo poderá auxiliar no direcionamento de trabalhos e pesquisas futuras. Na seção \ref{sec:trabalhos-relacionados} é apresentado os trabalhos que fazem referência a arquitetura de microserviços e o uso de coreografia. A seção \ref{sec:resultados} apresenta a compilação das estratégias de coreografia e ferramentas comumente citadas na literatura e/ou utilizados pela mercado. E a seção \ref{sec:conclusao} discute o resultado do artigo e trabalhos futuros.
 
 \section{Trabalhos relacionados}
 \label{sec:trabalhos-relacionados}
@@ -115,25 +129,59 @@ Segundo \cite{wolf:2018}, um dos benefícios da arquitetura de microserviços é
 
 \emph{Como coreografar os microserviços para que o sistema tenha um baixo acoplamento e alta coesão?}
 
-Para \cite{damore:2018}, é possível obter o baixo acoplamento utilizando uma coreografia baseado em eventos. Neste caso, os microserviços 
+Para \cite{damore:2018}, é possível obter o baixo acoplamento utilizando uma coreografia baseada em eventos. Os microserviços conectam-se a um barramento de eventos (\textit{event bus}), e quando uma ação ou evento ocorre, basta que o serviço envie uma mensagem indicando a ocorrência do evento. Esta mensagem será enviada ao barramento de eventos, que notificará os serviços interessados (assinantes). Este modelo orientado a eventos utiliza a troca de mensagens assíncrona como forma de comunicação. Neste caso, é necessário um intermediário nesta troca de mensagens (\textit{message broker}). 
+
+Segundo \cite{Curry2004}, um software e/ou infra-estrutura que provê o suporte e a capacidade necessária para a troca de mensagens entre os componentes de um sistema distribuído, é chamado de \textit{Message Oriented Middleware} (MOM). Nesta infra-estrutura, cada componente e/ou serviço conecta-se a uma camada intermediária (\textit{message broker}), que é responsável pelo recebimento e envio de mensagens. Os sistemas baseados no MOM não tem problema de espera (ou bloqueio), pois os serviços podem enviar as mensagens que são persistidas no \textit{message broker}, e este será responsável por enviar a mensagem ao destinatário quando ele estiver ativo.
+
+As mensagens que chegam ao MOM são armazenados em filas. Por padrão as filas são PEPS (Primeiro a Entrar, Primeiro a Sair) ou FIFO em inglês (\textit{First-IN, First-OUT}). Assim como a ordem, o nome e o tamanho da fila podem ser alterados no sistema de mensagens \cite{Curry2004}.  
+
+
+Categorizar estudos como acadêmicos e de indústrias que nem o \cite{francesco:2017}
+
+
+
+As duas formas de troca de mensagens assíncronas mais comuns utilizadas na arquitetura de microserviços são: publicador e assinante (\textit{pub/sub messaging}) e fila de mensagens (\textit{queue messaging}). No publicador e assinante, qualquer mensagem publicada em um tópico é imediatamente recebida por todos os serviços interessados neste tópico\cite{aws-pub-sub:2018}. 
+
+Este tipo de estratégia de coreografia foi adotada por \cite{richter:2017} no desenvolvimento de um sistema para compra e venda de passagens de trens na Alemanha. Dentre os requisitos não funcionais estavam alta disponibilidade, ambiente não confiável. A replicação dos microserviços em diversos servidores físicos espalhados, permitiu a redundância e alta disponibilidade do sistema. E a comunicação entre os microserviços foi feita através uma fila de mensagens assíncrona, permitindo o desacoplamento da comunicação e colaborando na tolerância a falhas também \cite{richter:2017}.
+
+event-driven é diferente de message-driven \cite{reactive-manifesto:2014, boner:2016}
+
+Messages are needed to communicate across the network and form the basis for communication in distributed systems, while events on the other hand are emitted locally. It is common to use messaging under the hood to bridge an event-driven system across the network by sending events inside messages. This allows maintaining the relative simplicity of the event-driven programming model in a distributed context and can work very well for specialized and well-scoped use cases (e.g., AWS Lambda, Distributed Stream Processing products like Spark Streaming, Flink, Kafka, and Akka Streams over Gearpump, and distributed Publish Subscribe products like Kafka and Kinesis). \cite{boner:2016}
+
+pub/sub messaging \cite{aws-pub-sub:2018} é diferente de queue message \cite{aws-message-queue:2018}
+
+Há varias ferramentas para message queue e outras para pub/sub.
+
+
+
+reactive system sao message driven ao invés de event driven. Mas pode criar uma arquitetura de microserviços que é event driven como descrito por \cite{damore:2018, boner:2016}.
+
+Reactive Programming é Vert.x. \cite{boner:2016}. 
+
+Permite construir microserviços reativos também \cite{Fetzer:2017}
+
 
 
 
 \section{Resultados}
 \label{sec:resultados}
 
-Seção de resultados
+\subsection{Ameaças à validade}
+
+O italiano tentou definir uma taxonomia, afim de auxiliar tanto pesquisadores quanto desenvolvedores para um termo comum. O manifesto React é uma tentativa para definir um glossario comum para sistemas reativos e serve de inspiração para sistemas baseados em microserviços.
+
+Muitos artigos não fazem referência ao termo coreografia ou choreography, em inglês. Foi necessário alterar a string de busca e ampliá-la. Utilizou-se os termos architecture e microservices nas bases da Scopus, IEEE e ACM. E junto com este termo foram filtrados artigos que continham referências a: event-driven, reactive, queue, pub/sub e similares.
+
+Portanto, as estratégias apresentadas na seção  \ref{sec:resultados} permeiam apenas um conjunto possível de soluções. Além disso, pela dificuldade em encontrar referências e também familiaridade dos autores com empresas de tecnologia, servimo-nos de artigos técnicos, white paper e post em blogs de especialistas. 
+
+Esta pesquisa exploratória permitiu-nos familiarizar com as estratégias de coreografia, porém a não utilização de uma revisão sistemática e uso de literatura cinzenta, em alguns casos, representam uma ameaça a validade da pesquisa.
 
 \section{Conclusão}
 \label{sec:conclusao}
 
-Bibliographic references must be unambiguous and uniform.  We recommend giving
-the author names references in brackets, e.g. \cite{knuth:84},
-\cite{boulic:91}, and \cite{smith:99}.
+Arquitetura de sistemas distribuídos baseado em microserviços é bem recente. Segundo Dargoli, microserviços faz parte da segunda geração dos sistemas orientados a serviços (SOA). Termo foi utilizado pela primeira vez em 2011. Nesta geração os serviços são mais leves, simples e alto contidos. Mais fáceis de implementar em comparação com a primeira geração. Pelo fato de ser recente, há dificuldade em definir um glossário comum entre os desenvolvedores e empresas e a academia. Durante a pesquisa exploratória para verificar quais estratégias de coreografia são comumente utilizadas, tivemos dificuldade em encontrar artigos e estudos relacionados a este tema. Newman definiu coreografia como um estilo arquitetural. Porém a forma como deve ser feita, a maneira, não foi especificada. Oliver foi além, num artigo publicado em seu blog. 
+Neste sentido, esta pesquisa exploratória serviu para apresentar algumas maneiras de como os microserviços podem ser coreografados afim de manter o sistema com baixo acoplamento e alta coesão. Boa parte das estratégias encontradas na literatura (acadêmica e cinzenta) fazem referências a modelos e estilos já previamente conhecidos em sistemas distribuídos. 
 
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
