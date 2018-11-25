@@ -34,11 +34,8 @@
 \maketitle
 
 \begin{abstract}
-  This meta-paper describes the style to be used in articles and short papers
-  for SBC conferences. For papers in English, you should add just an abstract
-  while for the papers in Portuguese, we also ask for an abstract in
-  Portuguese (``resumo''). In both cases, abstracts should not have more than
-  10 lines and must be in the first page of the paper.
+    Microservices architecture are highly demanded today. And new techniques for microservices integration are needed. Choreography is one way for cordinating microservices communication. Choreography isn't new, 
+    WS-CDL is a protocol for choreographying SOA\footnotemark[1] applications. As \cite{martinfowler-microservices:2014} said, microservices architecture should favor smart endpoints and dumb pipes, then we would like to find different ways of choreogrphying our microservices by an exploratory research.
 \end{abstract}
      
 \begin{resumo} 
@@ -65,7 +62,7 @@ E segundo \cite{Dragoni2017, martinfowler-microservices:2014}, uma arquitetura d
 
 Umas das justificativas para adoção da arquitetura de microserviços por parte das empresas é a facilidade na hora de escalar. Enquanto numa aplicação monolítica, o custo para escala é alto, pois você deve implantar uma aplicação completa numa outra máquina (escala horizontal), já na microserviços, você implanta somente o serviço que está sendo mais requisitado. Esta é uma vantagem da arquitetura de microserviços, pois você consegue aumentar os recursos somente para a parte com maior \textit{workload} do sistema. 
 
-Para \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. A manutenção é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
+Para \cite{wolf:2018}, a principal vantagem dos microserviços é o baixo acoplamento e alta coesão. O baixo acoplamento e a alta coesão facilita a divisão do desenvolvimento entre várias equipes. Além disso, num mercado altamente competitivo, a arquitetura de microserviços facilita a implantação de novas funcionalidades. A manutenção também é facilitada, pois basta alterar o microserviço com problema, sem a necessidade de fazer a implantação do sistema inteiro.
 
 Segundo \cite{martinfowler-microservices:2014},as arquiteturas de microserviços compartilham algumas caraterísticas, dentre elas:
 
@@ -78,7 +75,7 @@ Segundo \cite{martinfowler-microservices:2014},as arquiteturas de microserviços
     \item Gerenciamento de dados descentralizado
     \item Automação da infra-estrutura
     \item Tolerância a falhas
-    \item Projeto evolutivo
+    \item Projeto evolucionário \footnote{Tanto arquitetura e projeto evolucionário são utilizados neste artigo com o mesmo significado adotado por \cite{martinfowler-microservices:2014} em seu artigo.}
 \end{itemize}
 
 E de acordo com \cite{Alshuqayran:2016}, os principais benefícios apontados por quem adota esta arquitetura são o aumento em:
@@ -129,7 +126,7 @@ Segundo \cite{wolf:2018}, um dos benefícios da arquitetura de microserviços é
 
 \emph{Como coreografar os microserviços para que o sistema tenha um baixo acoplamento e alta coesão?}
 
-Para \cite{damore:2018, Newman:15}, é possível obter o baixo acoplamento utilizando uma colaboração baseada em eventos. Os microserviços conectam-se a um barramento de eventos (\textit{event bus}), e quando uma ação ocorre, o serviço envia uma mensagem indicando a ocorrência do evento. Esta mensagem será enviada ao barramento, que notificará os serviços interessados (assinantes). Este modelo orientado a eventos utiliza a troca de mensagens assíncrona como forma de comunicação. Neste caso, é necessário um intermediário nesta troca de mensagens (\textit{message broker}). 
+Para \cite{damore:2018, Newman:15}, é possível obter o baixo acoplamento utilizando uma colaboração baseada em eventos. Os microserviços conectam-se a um barramento de eventos (\textit{event bus}), e quando uma ação ocorre, o serviço envia uma mensagem indicando a ocorrência do evento. Esta mensagem será enviada ao barramento, que notificará os serviços interessados (assinantes). Este modelo orientado a eventos utiliza a troca de mensagens assíncrona como forma de comunicação. Neste caso, é necessário um intermediário nesta troca de mensagens, um \textit{message broker}. 
 
 Segundo \cite{Curry2004}, um software e/ou infra-estrutura que provê o suporte e a capacidade necessária para a troca de mensagens entre os componentes de um sistema distribuído, é chamado de \textit{Message Oriented Middleware} (MOM). Nesta infra-estrutura, cada componente e/ou serviço conecta-se a uma camada intermediária (\textit{message broker}), que é responsável pelo recebimento e envio de mensagens. Os sistemas baseados no MOM não tem problema de espera (ou bloqueio), pois os serviços podem enviar as mensagens que são persistidas no \textit{message broker}, e este será responsável por enviar a mensagem ao destinatário quando ele estiver ativo.
 
@@ -145,7 +142,7 @@ Os modelos de mensagem disponíveis no MOM são:
 
 Já \cite{Brilhante:2017}, utiliza uma implementação do MOM, \textit{RabbitMQ} também, para construir uma arquitetura de microserviços reativa. Segundo o manifesto reativo (\cite{reactivemanifesto}), um sistema reativo deve ser responsivo, resiliente, elástico e orientado a mensagens. Para garantir as propriedades de um sistema reativo, \cite{Brilhante:2017} utilizou uma coreografia interna, baseada em filas assíncronas, para desacoplar as comunicações diretas de cada microserviço.  
 
-\cite{Abdelouahed:2018} propôs um sistema remoto de gerenciamento de irrigação alimentado por energia solar que utiliza o Vert.x, que contém uma implementação de MOM e permite criar uma fila de mensagens assíncrona com os modelos de mensagem ponto-a-ponto e/ou \textit{publish/subscribe}. Nos sistemas de agricultura ciber-físicos, sensores são utilizados para coletar informações sobre o clima, solo e plantação. A partir destas informações, as decisões são tomadas para gerenciar a irrigação, umidade do solo e verificar a saúde das plantas etc. Tanto as informações do solo, plantação quanto as tomadas de decisão por parte do agricultor são enviados ao \textit{message broker}, que armazena estas mensagens e repassa aos microserviços interessados. Neste caso, \cite{Abdelouahed:2018} utilizou o Vert.x para desenvolver uma arquitetura de microserviços reativa.
+\cite{Abdelouahed:2018} propôs um sistema remoto de gerenciamento de irrigação alimentado por energia solar que utiliza o Vert.x, que contém uma implementação de MOM e permite criar uma fila de mensagens assíncrona com os modelos de mensagem ponto-a-ponto e/ou \textit{publish/subscribe}. Nos sistemas de agricultura ciber-físicos, sensores são utilizados para coletar informações sobre o clima, solo e plantação. A partir destas informações, as decisões são tomadas para gerenciar a irrigação, umidade do solo e verificar a saúde das plantas etc. Tanto as informações do solo, plantação quanto as tomadas de decisão por parte do agricultor são enviados ao \textit{message broker}, que armazena estas mensagens e repassa aos serviços interessados. 
 
 \section{Resultados}
 \label{sec:resultados}
@@ -171,7 +168,15 @@ Portanto, os artigos discutidos na seção \ref{sec:trabalhos-relacionados} perm
 \section{Conclusão}
 \label{sec:conclusao}
 
+Neste estudo, verificamos os benefícios do uso de coreografia na integração dos microserviços. A coreografia permite desacoplar os microserviços, facilitando a manutenção, o acréscimo de novas funcionalidades ao sistema. Porém, o desenvolvimento de um sistema distribuído com comunicação assíncrona requer uma habilidade e conhecimento diferenciado da equipe. Deve-se levar em consideração a não disponiblidade dos serviços, o que fazer quando um serviço que estava inativo volta a ficar disponível, como rastrear as requisições de um usuário. 
 
+Durante o estudo exploratório, não foram levados em consideração os desafios e dificuldades para coreografar os microserviços. Um estudo poderia ser feito para identificar as dificuldades na integração dos microserviços. Ou um estudo para identificar formas de integração para que tenhamos uma arquitetura evolucionária\footnotemark[2], no qual seja fácil a manutenção e o acréscimo de novas funcionalidades. 
+
+Ao final, identificamos o MOM (\textit{Message Oriented Middleware}) como uma opção para integrar os microserviços. É necessário salientar que os artigos e estudos encontrados não apresentaram as dificuldades e desafios encontrados para fazer a integração utilizando o MOM. E também não foram abordados quais as habilidades e conhecimentos necessários a equipe para criar um sistema com esta arquitetura baseada em eventos e comunicação assíncrona. Além disso, identificamos o \textit{RabbitMQ} como uma implementação do MOM a ser utilizada, ressaltado também pelo \cite{martinfowler-microservices:2014} em seu artigo. Porém, há outras opções que não foram levadas em consideração, como O \textit{Kafka}, muito utilizado atualmente ou opções de produtos como serviço (\textit{PasS}), \textit{Amazon SQS} ou \textit{Google Pub/Sub}.
+
+Conforme \cite{martinfowler-microservices:2014} comentaram, a arquitetura de microserviços mostrou-se como uma opção para desenvolver sistemas atualmente, mas há muito a ser explorado ainda. No caso de coreografia, ela é uma opção de estilo arquitetural e a maneira como ela será feita e adotada, refletirá na arquitetura do sistema, facilitando ou dificultando a manutenção, por exemplo. 
+
+Pela dificuldade em encontrar referências, estudos sobre coreografia e pelos comentários de \cite{martinfowler-microservices:2014} em seu artigo, no qual comenta sobre as dificuldades de transpor as complexas chamadas internas de funções e métodos de um sistema monolítico para uma comunicação via mensagens assíncronas em uma arquitetura distribuída, esta área de integração de microserviços aparenta ser promissora e mais estudos poderiam auxiliar tanto empresas e equipe de desenvolvedores na concepção e desenho de soluções de projetos evolucionários\footnotemark[2].
 
 
 \bibliographystyle{sbc}
